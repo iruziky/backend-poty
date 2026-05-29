@@ -7,10 +7,11 @@ from app.core.config import settings
 app = FastAPI(title="PotyNews API", version="0.1.0")
 
 origins = [o.strip() for o in settings.CORS_ORIGINS.split(",") if o.strip()] or ["*"]
+allow_credentials = "*" not in origins
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
-    allow_credentials=True,
+    allow_credentials=allow_credentials,
     allow_methods=["*"],
     allow_headers=["*"],
 )
